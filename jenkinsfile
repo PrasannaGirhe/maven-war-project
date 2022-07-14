@@ -2,15 +2,15 @@ pipeline {
     agent { label "node1"
     }
     stages {
-        stage ("checkout code from github repository") {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/feature']], extensions: [], userRemoteConfigs: [[credentialsId: 'c03a6d38-2598-4523-b65e-595651f58dfa', url: 'https://github.com/PrasannaGirhe/maven-war-project.git']]])
-            }
+    stage ("checkout code from github repository") {
+        steps {
+            checkout([$class: 'GitSCM', branches: [[name: '*/feature']], extensions: [], userRemoteConfigs: [[credentialsId: 'c03a6d38-2598-4523-b65e-595651f58dfa', url: 'https://github.com/PrasannaGirhe/maven-war-project.git']]])
         }
-        stage (" build the code for maven-war-project ") {
-            steps {
-                sh 'mvn install'
-            }
+    }
+    stage (" build code from maven-war-project ") {
+        steps {
+            sh 'mvn deploy'
         }
+    }
     }
 }
